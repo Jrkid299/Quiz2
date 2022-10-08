@@ -1,4 +1,10 @@
+/*Rules for sizing the icon*/
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
 .header {
+    
     padding-bottom: 10px;
     padding-top: 10px;
     text-align: center;
@@ -9,3 +15,9 @@
     font-weight: 600;
     margin: 0;
 }
+
+.detailed-photo .like-button {
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
