@@ -1,10 +1,10 @@
 package data
 
-type me struct {
+type Me struct {
 	Name       string   `json:"name"`
-	Age        int32    `json:"age"`
+	Age        int      `json:"age"`
 	Location   string   `json:"location"`
 	Email      string   `json:"email"`
-	Interest   string   `json:"interest"`
-	Occupation []string `json:"occupation"`
+	Interest   []string `json:"interest"`
+	Occupation string   `json:"occupation"`
 }
