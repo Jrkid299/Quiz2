@@ -1,41 +1,71 @@
 module Pic exposing (main)
-
 import Html exposing (..)
-import Html.Attributes exposing (class, src)
+import Html.Attributes exposing (class)
+import Html.Events exposing (onClick)
+import Browser
+import Dict exposing (update)
 
-baseUrl : String
-baseUrl = 
-    "images/"
 
-initialModel : {url : String, caption : String}
-initialModel = 
+viewDetailedPhoto : { liked: Bool } -> Html Msg
+viewDetailedPhoto  model =
+    let 
+        buttonType =
+            if model.liked then
+                "star"
+            else
+                "star_border"
+        msg =
+            if model.liked then
+                Unlike
+            else
+                Like
+    in
+        div [ class "detailed-photo" ]
+            [
+            div [ class "photo-info" ]
+                [ div [ class "like-button" ]
+                    [ span 
+                        [ class "material-icons md-48"
+                        , onClick msg
+                        ]
+                        [ text buttonType ]
+                    ]
+                    
+                ]
+            ]
+
+-- Model
+
+initialModel : { liked : Bool }
+initialModel =
     {
-        url = baseUrl ++ "TheKeyboard Player.gif"
-        ,caption = "me"
+        
+        liked = False
     }
 
-viewPhoto : { url : String, caption : String} -> Html msg
-viewPhoto model = 
-    div [ class "detail-photo" ]
-    [
-        img [ src model.url ] []
-        , div [ class "photo-info" ]
-        [ h2 [ class "caption" ] [ text model.caption ] ]
-    ]
+type Msg = Like | Unlike
 
-
-view : {url : String, caption : String } -> Html msg
+update : Msg -> {  liked : Bool } -> { liked : Bool}
+update msg model =
+    case msg of
+        Like ->
+            { model | liked = True }
+        Unlike ->
+            { model | liked = False }
+view : {  liked : Bool} -> Html Msg
 view model =
     div []
-    [
-        div [ class "header" ]
-        [ h1 [] [text "Pic" ] ]
-        ,div [class "content-flow" ]
-        [
-            viewPhoto model
-        ]
+    [ div [ class "header" ]
+        [ h1[] [ text "Pic" ] ]
+    ,div [ class "content-flow" ]
+        [ viewDetailedPhoto model]
+    
     ]
-
-main : Html msg
+-- Main
+main : Program () {  liked : Bool} Msg
 main =
-    view initialModel
+    Browser.sandbox{
+        init = initialModel
+        ,view = view
+        ,update = update
+    }

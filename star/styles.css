@@ -4,7 +4,7 @@
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
 .header {
-    
+
     padding-bottom: 10px;
     padding-top: 10px;
     text-align: center;
@@ -19,5 +19,6 @@
 .detailed-photo .like-button {
     cursor: pointer;
     margin-bottom: 10px;
+    text-align: center;
   }
   
